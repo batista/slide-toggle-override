@@ -26,6 +26,8 @@ export class SlideToggleComponent implements AfterViewInit {
   @ViewChild('toggles', { read: ViewContainerRef }) toggleVCR: ViewContainerRef;
   @ViewChild('icons', { read: ViewContainerRef }) iconVCR: ViewContainerRef;
 
+  checked: boolean;
+
   ngAfterViewInit() {
     console.log('Mat-Slide-Toggle');
 

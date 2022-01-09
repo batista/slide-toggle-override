@@ -1,3 +1,7 @@
-<mat-slide-toggle #toggles [labelPosition]="'before'">Express</mat-slide-toggle>
+<mat-slide-toggle #toggles [labelPosition]="'before'" [(ngModel)]="checked"
+  >My Label</mat-slide-toggle
+>
 
-<mat-icon #icons [inline]="true">bolt</mat-icon>
+<mat-icon #icons [inline]="true">{{
+  checked ? 'task_alt' : 'highlight_off'
+}}</mat-icon>
