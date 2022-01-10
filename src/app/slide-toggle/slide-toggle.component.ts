@@ -20,7 +20,7 @@ import { MatIcon } from '@angular/material/icon';
 })
 export class SlideToggleComponent implements AfterViewInit {
   @ViewChild(MatSlideToggle) matSlideToggle: MatSlideToggle;
-  @ViewChild(MatIcon) matIcon: MatIcon;
+  @ViewChild('innerButton') matIcon: MatIcon;
   @ViewChild('innerLabel') innerLabel: ElementRef;
 
   @HostBinding('class.checked')

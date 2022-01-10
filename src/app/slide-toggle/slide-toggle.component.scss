@@ -1,30 +1,36 @@
+@use '@angular/material/core/style/variables';
+
+// Configurable fields
 $slide-width: 57px;
 $slide-height: 2rem;
-
 $toggle-button-to-container-ratio: 0.8;
-$toggle-button-width: calc(
-  #{$slide-height} * #{$toggle-button-to-container-ratio}
-);
-$toggle-button-height: #{$toggle-button-width};
-$toggle-button-radius: $slide-height / 2;
-
-$bar-background-color: #ffffff59;
-
-$inner-label--text-pading: 0.5rem;
-$inner-label--font-size: 0.75rem;
 $icon-size: 1.5rem;
-
+$inner-label--font-size: 0.75rem;
+$toggle-button--background-color--checked: #f76090;
 $inner-label--background-color--checked: #fff;
 $inner-label--text-color--checked: hsl(
   357,
   93%,
   65%
-); // #{$toggle-button--checked} ?
-$toggle-button--checked: #f76090;
+); // #{$toggle-button--background-color--checked} ?
 
+$toggle-button--background-color--unchecked: #bebec4;
 $inner-label--background-color--unchecked: #fff;
-$inner-label--text-color--unchecked: #bebec4;
-$toggle-button--unchecked: #bebec4;
+$inner-label--text-color--unchecked: $toggle-button--background-color--unchecked;
+
+// Forcing configurations to acceptable boundaries
+$_slide-width: max(#{$slide-width}, 55px);
+$_toggle-button-to-container-ratio: min(
+  max(#{$toggle-button-to-container-ratio}, 0.8),
+  1
+);
+$toggle-button-width: calc(
+  #{$slide-height} * #{$_toggle-button-to-container-ratio}
+);
+$toggle-button-height: #{$toggle-button-width};
+$toggle-button-radius: $slide-height / 2;
+$inner-label--text-pading: 0.5rem;
+$bar-background-color-default: #ffffff59;
 
 :host {
   background-color: darkblue;
@@ -52,6 +58,7 @@ $toggle-button--unchecked: #bebec4;
     .inner-label {
       display: flex;
       align-items: center;
+      justify-content: space-between;
       font-size: $inner-label--font-size;
       line-height: 1rem;
       margin: 0;
@@ -60,6 +67,13 @@ $toggle-button--unchecked: #bebec4;
       box-sizing: border-box;
       padding: $inner-label--text-pading;
       font-weight: 400;
+
+      .checked,
+      .unchecked {
+        max-width: calc(50% - 3px);
+        overflow: hidden;
+        text-overflow: clip;
+      }
     }
 
     // The label
@@ -71,18 +85,18 @@ $toggle-button--unchecked: #bebec4;
       height: $slide-height;
 
       .mat-slide-toggle-bar {
-        background-color: $bar-background-color;
+        background-color: $bar-background-color-default;
         border-radius: $toggle-button-radius;
         height: $slide-height;
-        width: $slide-width;
+        width: $_slide-width;
       }
 
-      $positioning-correction: calc(
-        #{$slide-height} * (1 - #{$toggle-button-to-container-ratio}) / 2
+      $button-position-correction-factor: calc(
+        #{$toggle-button-width} * (1 - #{$_toggle-button-to-container-ratio}) / 2
       );
       .mat-slide-toggle-thumb-container {
-        left: $positioning-correction;
-        top: $positioning-correction;
+        left: $button-position-correction-factor;
+        top: $button-position-correction-factor;
       }
 
       .mat-slide-toggle-thumb-container,
@@ -98,11 +112,6 @@ $toggle-button--unchecked: #bebec4;
       &:not(.mat-checked) {
         .inner-label {
           color: $inner-label--text-color--unchecked;
-          transform: translate3d(
-            calc(#{$slide-height} - #{$inner-label--text-pading}/ 2),
-            0,
-            0
-          );
         }
 
         .mat-slide-toggle-bar {
@@ -110,7 +119,7 @@ $toggle-button--unchecked: #bebec4;
         }
 
         .mat-slide-toggle-thumb {
-          background-color: $toggle-button--unchecked;
+          background-color: $toggle-button--background-color--unchecked;
         }
       }
 
@@ -125,14 +134,16 @@ $toggle-button--unchecked: #bebec4;
 
         .mat-slide-toggle-thumb-container {
           transform: translate3d(
-            calc(#{$slide-width} - #{$slide-height}),
+            calc(
+              #{$_slide-width} - #{$toggle-button-width} - 2 * #{$button-position-correction-factor}
+            ),
             0,
             0
           );
         }
 
         .mat-slide-toggle-thumb {
-          background-color: $toggle-button--checked;
+          background-color: $toggle-button--background-color--checked;
         }
       }
     }
