@@ -5,3 +5,7 @@
 <mat-icon #icons [inline]="true">{{
   checked ? ICON_CHECKED : ICON_UNCHECKED
 }}</mat-icon>
+
+<p #innerLabel class="inner-label">
+  {{ checked ? TEXT_CHECKED : TEXT_UNCHECKED }}
+</p>
