@@ -1,11 +1,11 @@
-<mat-slide-toggle #toggles [labelPosition]="'before'" [(ngModel)]="checked"
-  >My Label</mat-slide-toggle
->
+<mat-slide-toggle #toggles [labelPosition]="'before'" [(ngModel)]="checked">{{
+  labelText
+}}</mat-slide-toggle>
 
 <mat-icon #icons [inline]="true">{{
-  checked ? ICON_CHECKED : ICON_UNCHECKED
+  checked ? iconChecked : iconUnchecked
 }}</mat-icon>
 
 <p #innerLabel class="inner-label">
-  {{ checked ? TEXT_CHECKED : TEXT_UNCHECKED }}
+  {{ checked ? innerTextChecked : innerTextUnchecked }}
 </p>

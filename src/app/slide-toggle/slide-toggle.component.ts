@@ -5,6 +5,7 @@ import {
   Renderer2,
   ElementRef,
   Input,
+  HostBinding,
 } from '@angular/core';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { MatIcon } from '@angular/material/icon';
@@ -22,13 +23,16 @@ export class SlideToggleComponent implements AfterViewInit {
   @ViewChild(MatIcon) matIcon: MatIcon;
   @ViewChild('innerLabel') innerLabel: ElementRef;
 
-  checked: boolean;
+  @HostBinding('class.checked')
+  checked: boolean = true;
 
-  readonly ICON_CHECKED = 'task_alt';
-  readonly ICON_UNCHECKED = 'highlight_off';
+  @Input() iconChecked = 'bolt';
+  @Input() iconUnchecked = 'bolt';
 
-  readonly TEXT_CHECKED = 'På';
-  readonly TEXT_UNCHECKED = 'Av';
+  @Input() innerTextChecked = 'På';
+  @Input() innerTextUnchecked = 'Av';
+
+  @Input() labelText = 'Express';
 
   ngAfterViewInit() {
     this.renderer.appendChild(
