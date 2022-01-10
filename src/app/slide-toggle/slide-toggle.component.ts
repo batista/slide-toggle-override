@@ -27,11 +27,8 @@ export class SlideToggleComponent implements AfterViewInit {
   readonly ICON_CHECKED = 'task_alt';
   readonly ICON_UNCHECKED = 'highlight_off';
 
-  @Input()
-  TEXT_CHECKED = 'På';
-
-  @Input()
-  TEXT_UNCHECKED = 'Av';
+  readonly TEXT_CHECKED = 'På';
+  readonly TEXT_UNCHECKED = 'Av';
 
   ngAfterViewInit() {
     this.renderer.appendChild(
@@ -40,7 +37,7 @@ export class SlideToggleComponent implements AfterViewInit {
     );
 
     this.renderer.appendChild(
-      this.matSlideToggle._thumbBarEl.nativeElement.children[0],
+      this.matSlideToggle._thumbBarEl.nativeElement,
       this.innerLabel.nativeElement
     );
   }
