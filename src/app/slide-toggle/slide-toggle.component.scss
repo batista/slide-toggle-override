@@ -1,9 +1,18 @@
 $slide-width: 57px;
 $slide-height: 2rem;
 
+$toggle-button-to-container-ratio: 0.8;
+$toggle-button-width: calc(
+  #{$slide-height} * #{$toggle-button-to-container-ratio}
+);
+$toggle-button-height: #{$toggle-button-width};
+$toggle-button-radius: $slide-height / 2;
+
 $bar-background-color: #ffffff59;
 
 $inner-label--text-pading: 0.5rem;
+$inner-label--font-size: 0.75rem;
+$icon-size: 1.5rem;
 
 $inner-label--background-color--checked: #fff;
 $inner-label--text-color--checked: hsl(
@@ -43,7 +52,7 @@ $toggle-button--unchecked: #bebec4;
     .inner-label {
       display: flex;
       align-items: center;
-      font-size: 0.75rem;
+      font-size: $inner-label--font-size;
       line-height: 1rem;
       margin: 0;
       height: 100%;
@@ -62,25 +71,28 @@ $toggle-button--unchecked: #bebec4;
       height: $slide-height;
 
       .mat-slide-toggle-bar {
-        height: $slide-height;
-        border-radius: 1rem;
-        width: $slide-width;
         background-color: $bar-background-color;
+        border-radius: $toggle-button-radius;
+        height: $slide-height;
+        width: $slide-width;
       }
 
+      $positioning-correction: calc(
+        #{$slide-height} * (1 - #{$toggle-button-to-container-ratio}) / 2
+      );
       .mat-slide-toggle-thumb-container {
-        left: calc(#{$slide-height} * 0.1);
-        top: calc(#{$slide-height} * 0.1);
+        left: $positioning-correction;
+        top: $positioning-correction;
       }
 
       .mat-slide-toggle-thumb-container,
       .mat-slide-toggle-thumb {
-        height: calc(#{$slide-height} * 0.8);
-        width: calc(#{$slide-height} * 0.8);
+        height: $toggle-button-height;
+        width: $toggle-button-width;
       }
 
       .mat-slide-toggle-thumb {
-        font-size: 1.5rem;
+        font-size: $icon-size;
       }
 
       &:not(.mat-checked) {

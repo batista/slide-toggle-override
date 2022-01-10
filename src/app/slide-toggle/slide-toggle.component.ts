@@ -29,10 +29,10 @@ export class SlideToggleComponent implements AfterViewInit {
   @Input() iconChecked = 'bolt';
   @Input() iconUnchecked = 'bolt';
 
-  @Input() innerTextChecked = 'På';
-  @Input() innerTextUnchecked = 'Av';
+  @Input() innerTextChecked = 'On';
+  @Input() innerTextUnchecked = 'Off';
 
-  @Input() labelText = 'Express';
+  @Input() labelText = 'MyLabel';
 
   ngAfterViewInit() {
     this.renderer.appendChild(
